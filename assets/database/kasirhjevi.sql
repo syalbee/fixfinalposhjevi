@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2022 at 04:43 AM
+-- Generation Time: Mar 26, 2022 at 02:25 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -92,11 +92,15 @@ CREATE TABLE `tbl_barang` (
 --
 
 INSERT INTO `tbl_barang` (`barang_id`, `barcode`, `barang_nama`, `barang_harpok`, `barang_harjul`, `barang_harjul_grosir`, `barang_stok`, `barang_min_stok`, `barang_tgl_input`, `barang_tgl_last_update`, `barang_kategori_id`, `barang_user_id`, `barang_satuan_id`, `barang_suplier_id`, `active`, `id`) VALUES
-('BR000001', '8992761164485', 'Pulpy Minute Maid Natadecoco 300Ml', 7800, 9800, 9000, 150, 1, '2022-03-21 06:44:10', NULL, 6, 1, 10, 7, '1', 1),
-('BR000002', '4970129727514', 'Spidol Snowman Hitam Biasa', 6700, 7400, 7200, 30, 1, '2022-03-21 06:45:50', NULL, 8, 1, 10, 7, '1', 2),
-('BR000003', '8997018259549', 'AMh Jahe kuning Pcs', 1000, 1500, 1200, 152, 1, '2022-03-21 06:47:31', '2022-03-22 01:05:34', 6, 1, 10, 7, '1', 3),
-('BR000004', '089686910704', 'Indomie goreng rendang', 1890, 2500, 2200, 159, 1, '2022-03-21 17:13:16', NULL, 7, 1, 10, 8, '1', 4),
-('BR000005', '8999909002821', 'Marlboro Black 16 batang', 22000, 24300, 24000, 147, 1, '2022-03-22 12:59:59', NULL, 8, 1, 10, 8, '1', 5);
+('BR000001', '8992761164485', 'Pulpy Minute Maid Natadecoco 300Ml', 7800, 9800, 9000, 146, 1, '2022-03-21 06:44:10', NULL, 6, 1, 10, 7, '1', 1),
+('BR000002', '4970129727514', 'Spidol Snowman Hitam Biasa', 6700, 7400, 7200, 26, 1, '2022-03-21 06:45:50', NULL, 8, 1, 10, 7, '1', 2),
+('BR000003', '8997018259549', 'AMh Jahe kuning Pcs', 1000, 1500, 1200, 146, 1, '2022-03-21 06:47:31', '2022-03-22 01:05:34', 6, 1, 10, 7, '1', 3),
+('BR000004', '089686910704', 'Indomie goreng rendang', 1890, 2500, 2200, 155, 1, '2022-03-21 17:13:16', NULL, 7, 1, 10, 8, '1', 4),
+('BR000005', '8999909002821', 'Marlboro Black 16 batang', 22000, 24300, 24000, 151, 1, '2022-03-22 12:59:59', NULL, 8, 1, 10, 8, '1', 5),
+('BR000006', '8999168211330', 'Esse Punch POP Manggo 16', 21000, 24300, 23000, 27, 1, '2022-03-24 09:43:09', '2022-03-24 16:45:04', 8, 4, 10, 8, '1', 6),
+('BR000007', 'BR000007', 'Nivea Men cool kick green 50Ml', 17000, 21000, 19500, 138, 1, '2022-03-25 09:17:56', NULL, 9, 1, 10, 8, '1', 7),
+('BR000008', 'BR000008', 'Nuvo Handsanitizer 50ML', 5400, 6500, 6200, 143, 1, '2022-03-25 22:53:13', '2022-03-26 05:53:38', 10, 2, 10, 8, '1', 8),
+('BR000009', 'BR000009', 'Kayu Putih 15Ml Caplang ', 7200, 8100, 8000, 121, 1, '2022-03-25 22:56:45', '2022-03-26 05:57:37', 10, 2, 10, 7, '1', 9);
 
 -- --------------------------------------------------------
 
@@ -118,7 +122,8 @@ CREATE TABLE `tbl_beli` (
 
 INSERT INTO `tbl_beli` (`beli_nofak`, `beli_tanggal`, `beli_suplier_id`, `beli_user_id`, `beli_kode`) VALUES
 ('PYT45221321321', '2022-03-23', 8, 1, 'BL230322000001'),
-('KJH88742098', '2022-03-23', 8, 1, 'BL230322000002');
+('KJH88742098', '2022-03-23', 8, 1, 'BL230322000002'),
+('KJH887421214', '2022-03-25', 8, 1, 'BL250322000001');
 
 -- --------------------------------------------------------
 
@@ -144,7 +149,9 @@ INSERT INTO `tbl_detail_beli` (`d_beli_id`, `d_beli_nofak`, `d_beli_barang_id`, 
 (15, 'PYT45221321321', 'BR000005', 22000, 12, 264000, 'BL230322000001'),
 (16, 'PYT45221321321', 'BR000003', 1000, 21, 21000, 'BL230322000001'),
 (17, 'KJH88742098', 'BR000001', 7800, 12, 93600, 'BL230322000002'),
-(18, 'KJH88742098', 'BR000004', 18900, 21, 396900, 'BL230322000002');
+(18, 'KJH88742098', 'BR000004', 18900, 21, 396900, 'BL230322000002'),
+(19, 'KJH887421214', 'BR000005', 22000, 9, 198000, 'BL250322000001'),
+(20, 'KJH887421214', 'BR000002', 6700, 2, 13400, 'BL250322000001');
 
 -- --------------------------------------------------------
 
@@ -186,7 +193,38 @@ INSERT INTO `tbl_detail_jual` (`d_jual_id`, `d_jual_nofak`, `d_jual_barang_id`, 
 (164, '240322000006', 'BR000004', 'Indomie goreng rendang', 'Pcs', 18900, 2200, 1, 0, 2200),
 (165, '240322000006', 'BR000002', 'Spidol Snowman Hitam Biasa', 'Pcs', 6700, 7200, 1, 0, 7200),
 (166, '240322000007', 'BR000002', 'Spidol Snowman Hitam Biasa', 'Pcs', 6700, 7200, 1, 0, 7200),
-(167, '240322000007', 'BR000005', 'Marlboro Black 16 batang', 'Pcs', 22000, 24000, 1, 0, 24000);
+(167, '240322000007', 'BR000005', 'Marlboro Black 16 batang', 'Pcs', 22000, 24000, 1, 0, 24000),
+(168, '240322000008', 'BR000002', 'Spidol Snowman Hitam Biasa', 'Pcs', 6700, 7400, 1, 0, 7400),
+(169, '240322000008', 'BR000005', 'Marlboro Black 16 batang', 'Pcs', 22000, 24300, 1, 0, 24300),
+(170, '240322000009', 'BR000005', 'Marlboro Black 16 batang', 'Pcs', 22000, 24300, 1, 0, 24300),
+(171, '240322000010', 'BR000002', 'Spidol Snowman Hitam Biasa', 'Pcs', 6700, 7400, 1, 0, 7400),
+(172, '250322000001', 'BR000003', 'AMh Jahe kuning Pcs', 'Pcs', 1000, 1500, 1, 0, 1500),
+(173, '250322000001', 'BR000006', 'Esse Punch POP Manggo 16', 'Pcs', 21000, 24300, 1, 0, 24300),
+(174, '250322000001', 'BR000004', 'Indomie goreng rendang', 'Pcs', 1890, 2500, 1, 0, 2500),
+(175, '250322000002', 'BR000003', 'AMh Jahe kuning Pcs', 'Pcs', 1000, 1500, 1, 0, 1500),
+(176, '250322000002', 'BR000006', 'Esse Punch POP Manggo 16', 'Pcs', 21000, 24300, 1, 0, 24300),
+(177, '250322000003', 'BR000001', 'Pulpy Minute Maid Natadecoco 300Ml', 'Pcs', 7800, 9800, 1, 0, 9800),
+(178, '250322000003', 'BR000005', 'Marlboro Black 16 batang', 'Pcs', 22000, 24300, 1, 0, 24300),
+(179, '250322000003', 'BR000006', 'Esse Punch POP Manggo 16', 'Pcs', 21000, 24300, 1, 0, 24300),
+(180, '260322000001', 'BR000002', 'Spidol Snowman Hitam Biasa', 'Pcs', 6700, 7400, 1, 0, 7400),
+(181, '260322000001', 'BR000001', 'Pulpy Minute Maid Natadecoco 300Ml', 'Pcs', 7800, 9800, 1, 0, 9800),
+(182, '260322000001', 'BR000004', 'Indomie goreng rendang', 'Pcs', 1890, 2500, 1, 0, 2500),
+(183, '260322000002', 'BR000007', 'Nivea Men cool kick green 50Ml', 'Pcs', 17000, 21000, 1, 0, 21000),
+(184, '260322000002', 'BR000006', 'Esse Punch POP Manggo 16', 'Pcs', 21000, 24300, 1, 0, 24300),
+(185, '260322000002', 'BR000005', 'Marlboro Black 16 batang', 'Pcs', 22000, 24300, 1, 0, 24300),
+(186, '260322000003', 'BR000003', 'AMh Jahe kuning Pcs', 'Pcs', 1000, 1500, 2, 0, 3000),
+(187, '260322000003', 'BR000007', 'Nivea Men cool kick green 50Ml', 'Pcs', 17000, 21000, 1, 0, 21000),
+(188, '260322000003', 'BR000001', 'Pulpy Minute Maid Natadecoco 300Ml', 'Pcs', 7800, 9800, 1, 0, 9800),
+(189, '260322000004', 'BR000002', 'Spidol Snowman Hitam Biasa', 'Pcs', 6700, 7200, 1, 0, 7200),
+(190, '260322000004', 'BR000003', 'AMh Jahe kuning Pcs', 'Pcs', 1000, 1200, 1, 0, 1200),
+(191, '260322000004', 'BR000005', 'Marlboro Black 16 batang', 'Pcs', 22000, 24000, 1, 0, 24000),
+(192, '260322000005', 'BR000002', 'Spidol Snowman Hitam Biasa', 'Pcs', 6700, 7200, 1, 0, 7200),
+(193, '260322000005', 'BR000004', 'Indomie goreng rendang', 'Pcs', 1890, 2200, 1, 0, 2200),
+(194, '260322000006', 'BR000004', 'Indomie goreng rendang', 'Pcs', 1890, 2500, 1, 0, 2500),
+(195, '260322000006', 'BR000001', 'Pulpy Minute Maid Natadecoco 300Ml', 'Pcs', 7800, 9800, 1, 0, 9800),
+(196, '260322000006', 'BR000002', 'Spidol Snowman Hitam Biasa', 'Pcs', 6700, 7400, 1, 0, 7400),
+(197, '260322000007', 'BR000003', 'AMh Jahe kuning Pcs', 'Pcs', 1000, 1200, 1, 0, 1200),
+(198, '260322000007', 'BR000007', 'Nivea Men cool kick green 50Ml', 'Pcs', 17000, 19500, 1, 0, 19500);
 
 -- --------------------------------------------------------
 
@@ -202,21 +240,35 @@ CREATE TABLE `tbl_jual` (
   `jual_kembalian` double DEFAULT NULL,
   `jual_user_id` int(11) DEFAULT NULL,
   `jual_keterangan` varchar(20) DEFAULT NULL,
-  `jual_member_id` int(11) DEFAULT NULL
+  `jual_member_id` int(11) DEFAULT NULL,
+  `jual_deskripsi` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_jual`
 --
 
-INSERT INTO `tbl_jual` (`jual_nofak`, `jual_tanggal`, `jual_total`, `jual_jml_uang`, `jual_kembalian`, `jual_user_id`, `jual_keterangan`, `jual_member_id`) VALUES
-('240322000001', '2022-03-23 23:14:05', 94100, 100000, 5900, 1, 'eceran', NULL),
-('240322000002', '2022-03-23 23:16:05', 94100, 100000, 5900, 1, 'eceran', NULL),
-('240322000003', '2022-03-23 23:37:06', 36600, 50000, 13400, 1, 'eceran', 13),
-('240322000004', '2022-03-23 23:47:50', 36600, 40000, 3400, 1, 'eceran', 12),
-('240322000005', '2022-03-23 23:51:42', 7400, 8000, 600, 1, 'eceran', NULL),
-('240322000006', '2022-03-24 00:26:07', 33400, 35000, 1600, 1, 'eceran', 13),
-('240322000007', '2022-03-24 00:29:34', 31200, 35000, 3800, 1, 'grosir', 13);
+INSERT INTO `tbl_jual` (`jual_nofak`, `jual_tanggal`, `jual_total`, `jual_jml_uang`, `jual_kembalian`, `jual_user_id`, `jual_keterangan`, `jual_member_id`, `jual_deskripsi`) VALUES
+('240322000001', '2022-03-23 23:14:05', 94100, 100000, 5900, 1, 'eceran', NULL, NULL),
+('240322000002', '2022-03-23 23:16:05', 94100, 100000, 5900, 1, 'eceran', NULL, NULL),
+('240322000003', '2022-03-23 23:37:06', 36600, 50000, 13400, 1, 'eceran', 13, NULL),
+('240322000004', '2022-03-23 23:47:50', 36600, 40000, 3400, 1, 'eceran', 12, NULL),
+('240322000005', '2022-03-23 23:51:42', 7400, 8000, 600, 1, 'eceran', NULL, NULL),
+('240322000006', '2022-03-24 00:26:07', 33400, 35000, 1600, 1, 'eceran', 13, NULL),
+('240322000007', '2022-03-24 00:29:34', 31200, 35000, 3800, 1, 'grosir', 13, NULL),
+('240322000008', '2022-03-24 09:18:04', 31700, 35000, 3300, 1, 'eceran', NULL, NULL),
+('240322000009', '2022-03-24 09:48:52', 24300, 25000, 700, 4, 'eceran', NULL, NULL),
+('240322000010', '2022-03-24 09:55:21', 7400, 10000, 2600, 4, 'eceran', NULL, NULL),
+('250322000001', '2022-03-25 09:46:09', 28300, 35000, 6700, 1, 'eceran', 12, NULL),
+('250322000002', '2022-03-25 09:47:01', 25800, 50000, 24200, 1, 'eceran', NULL, NULL),
+('250322000003', '2022-03-25 09:48:02', 58400, 60000, 1600, 1, 'eceran', 13, NULL),
+('260322000001', '2022-03-25 22:32:37', 19700, 19700, 0, 1, 'eceran', 13, 'Hutang '),
+('260322000002', '2022-03-25 22:33:33', 69600, 69600, 0, 1, 'eceran', NULL, ''),
+('260322000003', '2022-03-25 22:35:23', 33800, 37000, 3200, 1, 'eceran', 12, ''),
+('260322000004', '2022-03-25 22:43:22', 32400, 32400, 0, 1, 'grosir', NULL, 'Hutang sebsar 2500'),
+('260322000005', '2022-03-25 22:44:36', 9400, 10000, 600, 1, 'grosir', 12, ''),
+('260322000006', '2022-03-25 22:47:07', 19700, 20000, 300, 2, 'eceran', 13, 'Apa apa aja'),
+('260322000007', '2022-03-25 22:47:33', 20700, 30000, 9300, 2, 'grosir', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -238,7 +290,8 @@ INSERT INTO `tbl_kategori` (`kategori_id`, `kategori_nama`, `active`) VALUES
 (6, 'Minuman', '1'),
 (7, 'Makanan', '1'),
 (8, 'Roko', '1'),
-(9, 'Atk', '1');
+(9, 'Atk', '1'),
+(10, 'Obat-obatan', '1');
 
 -- --------------------------------------------------------
 
@@ -262,8 +315,8 @@ CREATE TABLE `tbl_member` (
 --
 
 INSERT INTO `tbl_member` (`id`, `kode`, `nama`, `notelp`, `alamat`, `nik`, `point`, `active`) VALUES
-(12, 'PLG220001', 'Aditya Ahmad', '0220987654321', 'Jl cikole', '1234567890098766', 1, '1'),
-(13, 'PLG220002', 'Aksyal Abe', '08965603219', 'Jl Sekeloa Utara', '1234567890123459', 3, '1');
+(12, 'PLG220001', 'Aditya Ahmad', '0220987654321', 'Jl cikole', '1234567890098766', 192, '1'),
+(13, 'PLG220002', 'Aksyal Abe', '08965603219', 'Jl Sekeloa Utara', '1234567890123459', 120, '1');
 
 -- --------------------------------------------------------
 
@@ -304,7 +357,8 @@ INSERT INTO `tbl_satuan` (`satuan_id`, `satuan_nama`, `active`) VALUES
 (11, 'Kg', '1'),
 (12, 'Btl', '1'),
 (13, 'Liter', '1'),
-(14, 'Cardus', '0');
+(14, 'Cardus', '0'),
+(15, 'Karton', '1');
 
 -- --------------------------------------------------------
 
@@ -326,7 +380,8 @@ CREATE TABLE `tbl_suplier` (
 
 INSERT INTO `tbl_suplier` (`suplier_id`, `suplier_nama`, `suplier_alamat`, `suplier_notelp`, `active`) VALUES
 (7, 'Cv Adhi Mekar Tjaya', 'Jl Tebet Dalam ', '089654892131', '1'),
-(8, 'CV Wiraswasta', 'Jl Sekeloa', '08965603215', '1');
+(8, 'CV Wiraswasta', 'Jl Sekeloa', '08965603215', '1'),
+(9, 'PD Toko Cipta', 'Jl Sekeloa Utara', '08965603215', '0');
 
 -- --------------------------------------------------------
 
@@ -349,7 +404,7 @@ CREATE TABLE `tbl_toko` (
 --
 
 INSERT INTO `tbl_toko` (`id`, `nama`, `alamat`, `minPoint`, `point`, `jumUang`, `uang`) VALUES
-(1, 'Toko Hj Evi', 'Jl Barat Daya Cirebon No 123', 220, 1, 25000, 1000);
+(1, 'Toko kelontong Hj Evi ', 'Jl Barat Daya Cirebon No 123 RT02/32', 210, 2, 26000, 2000);
 
 -- --------------------------------------------------------
 
@@ -364,6 +419,14 @@ CREATE TABLE `tbl_tukar_point` (
   `tukar_point` int(11) DEFAULT NULL,
   `jumlah_uangkeluar` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_tukar_point`
+--
+
+INSERT INTO `tbl_tukar_point` (`id`, `tanggal`, `id_pelanggan`, `tukar_point`, `jumlah_uangkeluar`) VALUES
+(7, '2022-03-25 16:59:50', 'PLG220002', 210, 2000),
+(8, '2022-03-25 17:03:44', 'PLG220001', 210, 2000);
 
 -- --------------------------------------------------------
 
@@ -386,7 +449,8 @@ CREATE TABLE `tbl_user` (
 
 INSERT INTO `tbl_user` (`user_id`, `user_nama`, `user_username`, `user_password`, `user_level`, `user_status`) VALUES
 (1, 'Admin ', 'admin', '$2y$10$/I7laWi1mlNFxYSv54EUPOH8MuZhmRWxhE.LaddTK9TSmVe.IHP2C', '1', '1'),
-(2, 'Kasir Umum', 'kasir', '$2y$10$/I7laWi1mlNFxYSv54EUPOH8MuZhmRWxhE.LaddTK9TSmVe.IHP2C', '2', '1');
+(2, 'Kasir Umum', 'kasir', '$2y$10$/I7laWi1mlNFxYSv54EUPOH8MuZhmRWxhE.LaddTK9TSmVe.IHP2C', '2', '1'),
+(4, 'Aditya Ahmad', 'aditage', '$2y$10$1QU/f1xVeGBev93Xd0rgZOtjLZ5M3SIXH4u5fFHBIG9lFC4TdrE8O', '1', '0');
 
 --
 -- Indexes for dumped tables
@@ -501,25 +565,25 @@ ALTER TABLE `cek`
 -- AUTO_INCREMENT for table `tbl_barang`
 --
 ALTER TABLE `tbl_barang`
-  MODIFY `id` int(19) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(19) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_detail_beli`
 --
 ALTER TABLE `tbl_detail_beli`
-  MODIFY `d_beli_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `d_beli_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tbl_detail_jual`
 --
 ALTER TABLE `tbl_detail_jual`
-  MODIFY `d_jual_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
+  MODIFY `d_jual_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=199;
 
 --
 -- AUTO_INCREMENT for table `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
-  MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_member`
@@ -537,25 +601,25 @@ ALTER TABLE `tbl_retur`
 -- AUTO_INCREMENT for table `tbl_satuan`
 --
 ALTER TABLE `tbl_satuan`
-  MODIFY `satuan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `satuan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tbl_suplier`
 --
 ALTER TABLE `tbl_suplier`
-  MODIFY `suplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `suplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_tukar_point`
 --
 ALTER TABLE `tbl_tukar_point`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
