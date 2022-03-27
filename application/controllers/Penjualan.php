@@ -68,65 +68,63 @@ class Penjualan extends CI_Controller
 				'amount'	=> intval($i['barang_harjul'])
 			);
 
-            if ($this->cart->insert($data)) {
-                echo json_encode('sukses');
-            }
+			if ($this->cart->insert($data)) {
+				echo json_encode('sukses');
+			}
 		} else {
 			echo "Halaman tidak ditemukan";
 		}
 	}
 
-    public function read()
-    {
-        $output = '';
-        $i = 1;
-        foreach ($this->cart->contents() as $items) {
-            echo form_hidden($i . '[rowid]', $items['rowid']);
+	public function read()
+	{
+		$output = '';
+		$i = 1;
+		foreach ($this->cart->contents() as $items) {
+			echo form_hidden($i . '[rowid]', $items['rowid']);
 
-            $output .=
-            '<tr>
-                <input type="hidden" id="BRGiD" name="BRGiD" value="'.$items['rowid'].'">
-                <input type="hidden" id="BRGprice" name="BRGprice" value="'.$items['amount'].'">
+			$output .=
+				'<tr>
+                <input type="hidden" id="BRGiD" name="BRGiD" value="' . $items['rowid'] . '">
+                <input type="hidden" id="BRGprice" name="BRGprice" value="' . $items['amount'] . '">
                 <td>' . $items['id'] . ' </td>
                 <td>' . $items['name'] . ' </td>
                 <td style="text-align:center;">' . $items['satuan'] . ' </td>
                 <td style="text-align:right;">' . number_format($items['amount']) . ' </td>
-                <td><input type="text" id="etdisc" name="ETdiskon" value="'.$items['disc'].'" class="form-control input-sm" style="width:130px;margin-right:5px;" required></td>
-                <td><input type="text" id="etqty" name="ETqty" value=" '.$items['qty'].'" class="form-control input-sm" style="width:90px;margin-right:5px;" required></td>
+                <td><input type="text" id="etdisc" onkeydown="search(this)" name="ETdiskon" value="' . $items['disc'] . '" class="form-control input-sm" style="width:130px;margin-right:5px;" required></td>
+                <td><input type="text" id="etqty" onkeydown="search(this)" name="ETqty" value=" ' . $items['qty'] . '" class="form-control input-sm" style="width:90px;margin-right:5px;" required></td>
                 <td style="text-align:right;">' . number_format($items['subtotal']) . ' </td>
                 <td style="text-align:center;">
-                <button id="'.$items['rowid'].'"  class="edit_cart btn btn-warning btn-xs">Edt</button>
-                <button id="'.$items['rowid'].'"  class="hapus_cart btn btn-danger btn-xs">Hps</button>
+                <button id="' . $items['rowid'] . '"  class="edit_cart btn btn-warning btn-xs">Edt</button>
+                <button id="' . $items['rowid'] . '"  class="hapus_cart btn btn-danger btn-xs">Hps</button>
             </td>
             </tr>
             ';
-            $i++;
-        }
-        echo $output;
-    }
+			$i++;
+		}
+		echo $output;
+	}
 
 	public function remove()
 	{
 		$this->cart->update(array(
-		    'rowid' => $this->input->post('row_id'),
-	        'qty' => 0
+			'rowid' => $this->input->post('row_id'),
+			'qty' => 0
 		));
-			
-		
 	}
 
-    public function edit()
-    {
-        $qty = $this->input->post('qty');
-        $diskon = $this->input->post('diskon');
-        $price = $this->input->post('price');
-        $this->cart->update(array(
-            'rowid' => $this->input->post('row_id'),
-            'qty' => $qty,
-            'price' => $price - $diskon,
-            'disc' => $diskon
-        ));
-    }
+	public function edit()
+	{
+		$qty = $this->input->post('qty');
+		$diskon = $this->input->post('diskon');
+		$price = $this->input->post('price');
+		$this->cart->update(array(
+			'rowid' => $this->input->post('row_id'),
+			'qty' => $qty,
+			'price' => $price - $diskon,
+			'disc' => $diskon
+		));
+	}
 
 	public function simpan_penjualan()
 	{

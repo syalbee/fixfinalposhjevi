@@ -91,9 +91,18 @@
                     </tr>
                     <tr>
                         <td></td>
+                        <th>Set Total</th>
+                        <th style="text-align:center;">
+                            <br>
+                            <input type="checkbox" class="form-check-input" id="setTotal" name="setTotal">
+                            <label class="form-check-label" for="setTotal">Set Total</label>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td></td>
                         <th>Deskripsi</th>
                         <th style="text-align:right;">
-                        <br>
+                            <br>
                             <textarea cols="25" rows="3" id="message" name="message"></textarea>
                         </th>
                     </tr>
@@ -154,7 +163,6 @@
 
 <script type="text/javascript">
     function resultHasil() {
-
         // $(function() {
         $.ajax({
             type: "GET",
@@ -369,6 +377,27 @@
             cache: true,
         },
     });
+
+    function search(ele) {
+        if (event.key === 'Enter') {
+            $('.edit_cart').click();
+            $("#kode_brg")[0].focus();
+        }
+    }
+
+    $(document).ready(function() {
+        $('#setTotal').change(function() {
+            var varSettotal = $('input[name="setTotal"]:checked').length > 0;
+            if (varSettotal != false) {
+                var totalValue = $('#total').val();
+                $('#jml_uang').val(totalValue);
+                $('#jml_uang2').val(totalValue);
+                console.log(totalValue);
+            }
+
+        });
+    });
+    
 </script>
 
 </body>

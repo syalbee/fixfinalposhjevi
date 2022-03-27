@@ -89,8 +89,8 @@ class Penjualan_grosir extends CI_Controller
                 <td>' . $items['name'] . ' </td>
                 <td style="text-align:center;">' . $items['satuan'] . ' </td>
                 <td style="text-align:right;">' . number_format($items['amount']) . ' </td>
-                <td><input type="text" id="etdisc" name="ETdiskon" value="'.$items['disc'].'" class="form-control input-sm" style="width:130px;margin-right:5px;" required></td>
-                <td><input type="text" id="etqty" name="ETqty" value=" '.$items['qty'].'" class="form-control input-sm" style="width:90px;margin-right:5px;" required></td>
+                <td><input type="text" id="etdisc" onkeydown="search(this)" name="ETdiskon" value="'.$items['disc'].'" class="form-control input-sm" style="width:130px;margin-right:5px;" required></td>
+                <td><input type="text" id="etqty" onkeydown="search(this)" name="ETqty" value=" '.$items['qty'].'" class="form-control input-sm" style="width:90px;margin-right:5px;" required></td>
                 <td style="text-align:right;">' . number_format($items['subtotal']) . ' </td>
                 <td style="text-align:center;">
                 <button id="'.$items['rowid'].'"  class="edit_cart btn btn-warning btn-xs">Edt</button>

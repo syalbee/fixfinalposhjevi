@@ -163,6 +163,8 @@
             }),
             success: function(msg) {
                 $('#detail_barang').html(msg);
+                $("#jumlah").focus();
+                // $("#kode_brg")[0].focus();
             },
             processResults: function(data) {
                 return {
@@ -194,8 +196,9 @@
                 success: function(msg) {
                     // console.log(msg);
                     $('#detail_barang').html(msg);
-                    addTochart();
-                    $("#kode_brg")[0].focus();
+                    $("#jumlah").focus();
+                    // addTochart();
+                    // $("#kode_brg")[0].focus();
                 }
             });
         });
@@ -216,6 +219,7 @@
             data: $("#addTocartbeli").serialize(),
             success: (a) => {
                 $('#detail_cart').load("<?= site_url('pembelian/read'); ?>");
+                $("#kode_brg")[0].focus();
                 console.log('s' + a);
             },
             error: (a) => {
@@ -235,6 +239,13 @@
             Swal.fire("Peringatan", "Pastikan Semua Inputan Benar", "warning");
         }
         dataMSG = "";
+    }
+
+    function setValues(ele) {
+        if (event.key === 'Enter') {
+            addTochart();
+            // alert(ele.value);
+        }
     }
 </script>
 

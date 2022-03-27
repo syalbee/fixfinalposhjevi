@@ -85,9 +85,9 @@ class Pengguna extends CI_Controller
         $password = "";
 
         if (empty($this->input->post('edtpassword')) || $this->input->post('edtpassword') === "") {
-           $password =  $this->input->post('Etpassword');
+            $password =  $this->input->post('Etpassword');
         } else {
-            $password =  $this->input->post('edtpassword');
+            $password =  password_hash($this->input->post('edtpassword'), PASSWORD_DEFAULT);
         }
 
         $data = array(
