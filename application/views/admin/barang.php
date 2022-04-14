@@ -24,14 +24,15 @@
                         <thead>
                             <tr>
                                 <th style="text-align:center;width:40px;">No</th>
-                                <th>Kode Barang</th>
+                                <!-- <th>Kode Barang</th> -->
                                 <th>Nama Barang</th>
                                 <th>Satuan</th>
                                 <th>Harga Pokok</th>
                                 <th>Harga (Eceran)</th>
                                 <th>Harga (Grosir)</th>
-                                <th>Stok</th>
-                                <th>Min Stok</th>
+                                <th>Stok Utama</th>
+                                <th>Stok Kedua</th>
+                                <th>Jumlah Min/satuan</th>
                                 <th>Kategori</th>
                                 <th style="width:100px;text-align:center;">Aksi</th>
                             </tr>
@@ -58,7 +59,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="BRformadd">
+                <form id="BRformadd" autocomplete="off">
                     <!-- <div class="form-group">
                         <label>Barcode</label>
                         <input name="barcode" class="form-control" type="text" placeholder="Barcode">
@@ -82,7 +83,7 @@
                         <label>Satuan</label>
                         <select class="form-control select2" style="width: 100%;" name="satuan">
                             <?php foreach ($sat->result_array() as $s) { ?>
-                                <option value="<?= $s['satuan_id']; ?>"><?= $s['satuan_nama']; ?></option>
+                                <option value="<?= $s['satuan_id']; ?>"><?= $s['satuan_nama']; ?> => <?= $s['satuan_turunan']; ?> </option>
                             <?php } ?>
                         </select>
                     </div>
@@ -97,28 +98,28 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Harga Pokok</label>
-                        <input name="harpok" class="harpok form-control" type="text" placeholder="Harga Pokok">
+                        <label>Harga Pokok Untuk Satuan Utama</label>
+                        <input name="harpok" class="harpok form-control" type="text" placeholder="Harga Pokok" required>
                     </div>
 
                     <div class="form-group">
-                        <label>Harga (Eceran)</label>
-                        <input name="harjul" class="harjul form-control" type="text" placeholder="Harga Jual Eceran">
+                        <label>Harga (Penjualan Grosir)</label>
+                        <input name="harjul_grosir" class="harjul form-control" type="text" placeholder="Harga (Penjualan Grosir) Untuk Satuan Utama" required>
                     </div>
 
                     <div class="form-group">
-                        <label>Harga (Grosir)</label>
-                        <input name="harjul_grosir" class="harjul form-control" type="text" placeholder="Harga Jual Grosir">
+                        <label>Harga (Penjualan Eceran)</label>
+                        <input name="harjul" class="harjul form-control" type="text" placeholder="Harga (Penjualan Eceran) Untuk Satuan Kedua">
                     </div>
 
                     <div class="form-group">
-                        <label>Stok</label>
-                        <input name="stok" class="form-control" type="number" placeholder="Stok">
+                        <label>Stok Untuk Satuan Utama</label>
+                        <input name="stok" class="form-control" type="number" placeholder="Stok Untuk Satuan Utama" required>
                     </div>
 
                     <div class="form-group">
-                        <label>Minimal Stok</label>
-                        <input name="min_stok" class="form-control" type="number" placeholder="Minimal Stok">
+                        <label>Jumlah min / satuan utama</label>
+                        <input name="min_stok" class="form-control" type="number" placeholder="Jumlah min / satuan utama" required>
                     </div>
 
                     <button class="btn btn-sm btn-success" type="button" onclick="addData()">Simpan</button>
@@ -135,7 +136,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Suplier</h5>
+                <h5 class="modal-title">Edit Barang</h5>
                 <button class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
@@ -143,6 +144,7 @@
             <div class="modal-body">
                 <form id="BRformedit">
                     <input name="kobar" type="hidden">
+
                     <!-- <div class="form-group">
                         <label>Barcode</label>
                         <input name="barcode" class="form-control" type="text" placeholder="Barcode">
@@ -159,11 +161,7 @@
                             <?php foreach ($kat->result_array() as $kt) {
                                 $id_kat = $kt['kategori_id'];
                                 $nm_kat = $kt['kategori_nama'];
-                                if ($id_kat == $kat_id) {
-                                    echo "<option value='$id_kat' selected>$nm_kat</option>";
-                                } else {
-                                    echo "<option value='$id_kat'>$nm_kat</option>";
-                                }
+                                echo "<option value='$id_kat'>$nm_kat</option>";
                             }
                             ?>
                         </select>
@@ -175,49 +173,62 @@
                             <?php foreach ($sup->result_array() as $s) {
                                 $id_sup = $s['suplier_id'];
                                 $nm_sup = $s['suplier_nama'];
-                                if ($id_sup == $sup_id) {
-                                    echo "<option value='$id_sup' selected>$nm_sup</option>";
-                                } else {
-                                    echo "<option value='$id_sup'>$nm_sup</option>";
-                                }
+                                echo "<option value='$id_sup'>$nm_sup</option>";
                             } ?>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Satuan</label>
-                        <select class="form-control select2" style="width: 100%;" name="satuan">
+                        <select class="form-control select2" style="width: 100%;" id="selSatuan" name="satuan">
                             <?php foreach ($sat->result_array() as $s) {
                                 $id_sat = $s['satuan_id'];
-                                $nm_sat = $s['satuan_nama'];
-                                if ($id_sat == $sat_id) {
-                                    echo "<option value='$id_sat' selected>$nm_sat</option>";
-                                } else {
-                                    echo "<option value='$id_sat'>$nm_sat</option>";
-                                }
+                                $nm_sat = $s['satuan_nama'] . " => ". $s['satuan_turunan'];
+                                echo "<option value='$id_sat'>$nm_sat</option>";
                             } ?>
 
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label>Harga Pokok</label>
+                    <!-- <div class="form-group">
+                        <label>Harga Pokok Untuk Satuan Utama</label>
                         <input name="harpok" class="form-control" type="text" placeholder="Harga Pokok">
                     </div>
 
                     <div class="form-group">
-                        <label>Harga (Eceran)</label>
+                        <label>Harga (Penjualan) Untuk Satuan Utama</label>
                         <input name="harjul" class="form-control" type="text" placeholder="Harga Jual Eceran">
                     </div>
 
                     <div class="form-group">
-                        <label>Harga (Grosir)</label>
+                        <label>Harga (Penjualan) Untuk Satuan Utama</label>
                         <input name="harjul_grosir" class="form-control" type="text" placeholder="Harga Jual Grosir">
                     </div>
 
                     <div class="form-group">
-                        <label>Minimal Stok</label>
+                        <label>Stok Untuk 1 Satuan Utama</label>
                         <input name="min_stok" class="form-control" type="number" placeholder="Minimal Stok">
+                    </div> -->
+                    
+                    <div class="form-group">
+                        <label>Harga Pokok Untuk Satuan Utama</label>
+                        <input name="harpok" class="harpok form-control" type="text" placeholder="Harga Pokok" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Harga (Penjualan Grosir)</label>
+                        <input name="harjul_grosir" class="harjul form-control" type="text" placeholder="Harga (Penjualan Grosir) Untuk Satuan Utama" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Harga (Penjualan Eceran)</label>
+                        <input name="harjul" class="harjul form-control" type="text" placeholder="Harga (Penjualan Eceran) Untuk Satuan Kedua">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Jumlah min / satuan utama</label>
+                        <input name="min_stok" class="form-control" type="number" placeholder="Jumlah min / satuan utama" required>
                     </div>
 
                     <button class="btn btn-sm btn-success" name="BREdtbtn" type="button" onclick="editData()">Edit</button>

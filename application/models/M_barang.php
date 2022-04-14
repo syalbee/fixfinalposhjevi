@@ -13,7 +13,7 @@ class M_barang extends CI_Model
 
     public function read()
     {
-        $hsl = $this->db->query("SELECT tbl_barang.*, tbl_kategori.`kategori_nama`, tbl_satuan.`satuan_nama`
+        $hsl = $this->db->query("SELECT tbl_barang.*, tbl_kategori.`kategori_nama`, tbl_satuan.`satuan_nama`, tbl_satuan.`satuan_turunan`
         FROM tbl_barang JOIN tbl_kategori ON tbl_barang.`barang_kategori_id` = tbl_kategori.`kategori_id` 
         JOIN tbl_satuan ON tbl_satuan.`satuan_id` = tbl_barang.`barang_satuan_id` WHERE tbl_barang.active = '1' ");
         return $hsl;
@@ -107,7 +107,13 @@ class M_barang extends CI_Model
     
     public function get_beli($kobar)
     {
-        $hsl = $this->db->query("SELECT tbl_barang.*, tbl_satuan.`satuan_nama` AS barang_satuan FROM tbl_barang JOIN tbl_satuan ON tbl_barang.`barang_satuan_id` = tbl_satuan.`satuan_id` WHERE tbl_barang.barang_id='$kobar' AND tbl_barang.active ='1'");
+        $hsl = $this->db->query("SELECT tbl_barang.*, tbl_satuan.`satuan_nama` AS barang_satuan, tbl_satuan.`satuan_turunan`FROM tbl_barang JOIN tbl_satuan ON tbl_barang.`barang_satuan_id` = tbl_satuan.`satuan_id` WHERE tbl_barang.barang_id='$kobar' AND tbl_barang.active ='1'");
+        return $hsl;
+    }
+
+    public function get_beliEceran($kobar)
+    {
+        $hsl = $this->db->query("SELECT tbl_barang.*, tbl_satuan.`satuan_turunan` AS barang_satuan FROM tbl_barang JOIN tbl_satuan ON tbl_barang.`barang_satuan_id` = tbl_satuan.`satuan_id` WHERE tbl_barang.barang_id='$kobar' AND tbl_barang.active ='1'");
         return $hsl;
     }
     

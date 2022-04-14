@@ -10,9 +10,9 @@ class M_satuan extends CI_Model
         return $hsl;
     }
 
-    function update_satuan($kode, $kat)
+    function update_satuan($kode, $kat, $satTur)
     {
-        $hsl = $this->db->query("UPDATE tbl_satuan set satuan_nama='$kat' where satuan_id='$kode'");
+        $hsl = $this->db->query("UPDATE tbl_satuan set satuan_nama='$kat', satuan_turunan='$satTur' where satuan_id='$kode'");
         return $hsl;
     }
 
@@ -22,9 +22,9 @@ class M_satuan extends CI_Model
 		return $this->db->get('tbl_satuan');
     }
 
-    function simpan_satuan($kat)
+    function simpan_satuan($kat ,$satTur)
     {
-        $hsl = $this->db->query("INSERT INTO tbl_satuan(satuan_nama, active) VALUES ('$kat', '1')");
+        $hsl = $this->db->query("INSERT INTO tbl_satuan(satuan_nama, satuan_turunan, active) VALUES ('$kat', '$satTur', '1')");
         return $hsl;
     }
 }

@@ -44,13 +44,14 @@ class Barang extends CI_Controller
         if ($this->m_barang->read()->num_rows() > 0) {
             foreach ($this->m_barang->read()->result() as $barang) {
                 $data[] = array(
-                    'barcode' => $barang->barang_id,
+                    // 'barcode' => $barang->barang_id,
                     'barang_nama' => $barang->barang_nama,
-                    'satuan_nama' => $barang->satuan_nama,
+                    'satuan_nama' => $barang->satuan_nama . " & " . $barang->satuan_turunan,
                     'barang_harpok' => $barang->barang_harpok,
                     'barang_harjul' => $barang->barang_harjul,
                     'barang_harjul_grosir' => $barang->barang_harjul_grosir,
-                    'barang_stok' => $barang->barang_stok,
+                    'barang_stok' => $barang->barang_stok . " " . $barang->satuan_nama,
+                    'barang_stok_turunan' => $barang->barang_stok * $barang->barang_min_stok . " " . $barang->satuan_turunan,
                     'barang_min_stok' => $barang->barang_min_stok,
                     'kategori_nama' => $barang->kategori_nama,
                     'action' => '<button class="btn btn-sm btn-warning" onclick="edit(' . $barang->id . ')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-danger" onclick="remove(' . $barang->id . ')"><i class="fas fa-trash"></i></button>',

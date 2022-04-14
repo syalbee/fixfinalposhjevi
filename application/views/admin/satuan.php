@@ -24,7 +24,8 @@
                         <thead>
                             <tr>
                                 <th style="text-align:center;width:40px;">No</th>
-                                <th>Satuan</th>
+                                <th>Satuan Pokok</th>
+                                <th>Satuan Turunan</th>
                                 <th style="width:140px;text-align:center;">Aksi</th>
                             </tr>
                         </thead>
@@ -36,10 +37,12 @@
                                 $no++;
                                 $id = $a['satuan_id'];
                                 $nm = $a['satuan_nama'];
+                                $tur = $a['satuan_turunan'];
                             ?>
                                 <tr>
                                     <td style="text-align:center;"><?php echo $no; ?></td>
                                     <td><?php echo $nm; ?></td>
+                                    <td><?php echo $tur; ?></td>
                                     <td style="text-align:center;">
                                         <a class="btn btn-xs btn-warning" href="#modalEditPelanggan<?php echo $id ?>" data-toggle="modal" title="Edit"><span class="fa fa-edit"></span> Edit</a>
                                         <a class="btn btn-xs btn-danger" href="#modalHapusPelanggan<?php echo $id ?>" data-toggle="modal" title="Hapus"><span class="fa fa-close"></span> Hapus</a>
@@ -71,8 +74,13 @@
                 <form class="form-horizontal" method="post" action="<?= base_url('satuan/tambah_satuan') ?>">
                     <input type="hidden" name="id">
                     <div class="form-group">
-                        <label>Nama Satuan</label>
-                        <input type="text" class="form-control" placeholder="Nama Satuan" name="satuan" required>
+                        <label>Satuan</label>
+                        <input type="text" class="form-control" placeholder="Satuan" name="satuan" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Satuan Turunan</label>
+                        <input type="text" class="form-control" placeholder="Satuan Turunan" name="satuanturunan">
                     </div>
 
                     <button class="btn btn-sm btn-success">Simpan</button>
@@ -89,6 +97,7 @@
 foreach ($data->result_array() as $a) {
     $id = $a['satuan_id'];
     $nm = $a['satuan_nama'];
+    $tur = $a['satuan_turunan'];
 ?>
     <div id="modalEditPelanggan<?php echo $id ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
         <div class="modal-dialog">
@@ -105,7 +114,14 @@ foreach ($data->result_array() as $a) {
                         <div class="form-group">
                             <label class="control-label col-xs-3">Satuan</label>
                             <div class="col-xs-9">
-                                <input name="satuan" class="form-control" type="text" value="<?php echo $nm; ?>" style="width:280px;" required>
+                                <input name="satuan" class="form-control" type="text" value="<?php echo $nm; ?>" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-xs-3">Satuan Turunan</label>
+                            <div class="col-xs-9">
+                                <input type="text" class="form-control" value="<?php echo $tur; ?>" name="edtsatuanturunan" required>
                             </div>
                         </div>
 
@@ -125,6 +141,7 @@ foreach ($data->result_array() as $a) {
 foreach ($data->result_array() as $a) {
     $id = $a['satuan_id'];
     $nm = $a['satuan_nama'];
+
 ?>
     <div id="modalHapusPelanggan<?php echo $id ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
         <div class="modal-dialog">

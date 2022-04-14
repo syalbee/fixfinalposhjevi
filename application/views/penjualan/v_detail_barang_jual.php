@@ -2,6 +2,7 @@
 error_reporting(0);
 
 $b = $brg->row_array();
+
 ?>
 <table>
     <tr>

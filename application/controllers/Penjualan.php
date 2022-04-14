@@ -40,12 +40,32 @@ class Penjualan extends CI_Controller
 	{
 		if ($this->session->userdata('akses') == '1' || $this->session->userdata('akses') == '2') {
 			$kobar = $this->input->post('kode_brg');
-			// echo $kobar;
-			// die;
+			$barang = $this->m_barang->get_beliEceran($kobar);
+			if ($barang->row()) {
+				echo json_encode($barang->row());
+			}
+		} else {
+			echo "Halaman tidak ditemukan";
+		}
+	}
+
+	public function ambil_barang()
+	{
+		if ($this->session->userdata('akses') == '1' || $this->session->userdata('akses') == '2') {
+			$kobar = $this->input->post('kode_brg');
 			$x['brg'] = $this->m_barang->get_beli($kobar);
 			$this->load->view('penjualan/v_detail_barang_jual', $x);
 		} else {
 			echo "Halaman tidak ditemukan";
+		}
+	}
+
+	public function get_barangkg()
+	{
+		$id = $this->input->post('kode_brg');
+		$barang = $this->m_barang->get_beli($id);
+		if ($barang->row()) {
+			echo json_encode($barang->row());
 		}
 	}
 
@@ -65,6 +85,33 @@ class Penjualan extends CI_Controller
 				'price'    => intval($i['barang_harjul']),
 				'disc'     => 0,
 				'qty'      => 1,
+				'amount'	=> intval($i['barang_harjul'])
+			);
+
+			if ($this->cart->insert($data)) {
+				echo json_encode('sukses');
+			}
+		} else {
+			echo "Halaman tidak ditemukan";
+		}
+	}
+
+	public function add_to_cart_kilo()
+	{
+
+		if ($this->session->userdata('akses') == '1' || $this->session->userdata('akses') == '2') {
+			$kobar = $this->input->post('idkg');
+			$produk = $this->m_barang->get_beli($kobar);
+
+			$i = $produk->row_array();
+			$data = array(
+				'id'       => $i['barang_id'],
+				'name'     => $i['barang_nama'],
+				'satuan'   => $i['satuan_turunan'],
+				'harpok'   => $i['barang_harpok'],
+				'price'    => intval($i['barang_harjul']),
+				'disc'     => 0,
+				'qty'      => $this->input->post('kgqty'),
 				'amount'	=> intval($i['barang_harjul'])
 			);
 
@@ -206,12 +253,31 @@ class Penjualan extends CI_Controller
 
 	public function coba()
 	{
-		$this->cart->destroy();
-		// foreach ($this->cart->contents() as $items) {
-		// 	echo $items['name'] . "<br>";
-		// 	echo $items['qty'] . "<br>";
+		// $this->cart->destroy();
+		// // foreach ($this->cart->contents() as $items) {
+		// // 	echo $items['name'] . "<br>";
+		// // 	echo $items['qty'] . "<br>";
 
-		// 	echo $items['rowid'] . "<br>";
+		// // 	echo $items['rowid'] . "<br>";
+		// // }
+		// $kobar = "BR000011";
+		// $x['brg'] = $this->m_barang->get_beli($kobar);
+		// $Kgid = $this->db->query('SELECT satuan_id FROM tbl_satuan WHERE satuan_nama ="Kg"')->result_array()[0]['satuan_id'];
+
+		// if ($x['brg']->result_array()[0]['barang_satuan_id'] === $Kgid) {
+		// 	echo "berhasil";
+		// } else {
+		// 	echo "lain";
 		// }
+
+		// $this->db->where('id', '12');
+		// $data = $this->db->get('tbl_member');
+		// echo json_encode($data->row());
+		$id = "BR000003";
+		$qty = 3;
+		$this->db->where('barang_id', $id);
+		$qtyBarang = $this->db->get('tbl_barang')->result_array()[0]['barang_min_stok'];
+
+		echo $qty / $qtyBarang;
 	}
 }

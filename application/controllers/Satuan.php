@@ -38,7 +38,8 @@ class Satuan extends CI_Controller
     {
         if ($this->session->userdata('akses') == '1'  || $this->session->userdata('akses') == '2') {
             $kat = $this->input->post('satuan');
-            $this->m_satuan->simpan_satuan($kat);
+            $satTur = $this->input->post('satuanturunan');
+            $this->m_satuan->simpan_satuan($kat, $satTur);
             echo $this->session->set_flashdata('msgSatuan', 'add');
             redirect('satuan');
         } else {
@@ -51,7 +52,8 @@ class Satuan extends CI_Controller
         if ($this->session->userdata('akses') == '1'  || $this->session->userdata('akses') == '2') {
             $kode = $this->input->post('kode');
             $kat = $this->input->post('satuan');
-            $this->m_satuan->update_satuan($kode, $kat);
+            $satTur = $this->input->post('edtsatuanturunan');
+            $this->m_satuan->update_satuan($kode, $kat, $satTur);
             echo $this->session->set_flashdata('msgSatuan', 'edit');
             redirect('satuan');
         } else {
@@ -70,5 +72,4 @@ class Satuan extends CI_Controller
             echo "Halaman tidak ditemukan";
         }
     }
-
 }

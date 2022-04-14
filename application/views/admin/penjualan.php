@@ -113,7 +113,35 @@
 
     </section>
     <!-- /.content -->
+
 </div>
+
+<!-- Modal show Kg -->
+<div class="modal fade" id="showBRGKg">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="title_modal" class="modal-title">Masukan Qty Dalam</h5>
+                <button class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 id="titleKg"></h5>
+                <!-- <form id="BRGkginsert"> -->
+                <input type="hidden" id="idkg" name="idkg">
+                <div class="form-group">
+                    <!-- <label>QTY :</label> -->
+                    <input id="kgqty" name="kgqty" type="text" onkeydown="addKeranjangkilo()" class="form-control">
+                </div>
+                <!-- <button class="btn btn-success" onclick="addKeranjangkilo()" type="button">Tambah</button> -->
+                <!-- </form> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal show Kg -->
+
 
 <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
@@ -164,6 +192,7 @@
 <script type="text/javascript">
     function resultHasil() {
         // $(function() {
+        $("#kode_brg")[0].focus();
         $.ajax({
             type: "GET",
             url: "<?php echo base_url('penjualan/readtotal'); ?>",
@@ -299,16 +328,57 @@
                 url: "<?php echo base_url('penjualan/get_barang'); ?>",
                 data: kobar,
                 success: function(msg) {
-                    // console.log(msg);
-                    $('#detail_barang').html(msg);
-                    addTochart();
-                    $("#kode_brg")[0].focus();
+                    const obj = JSON.parse(msg);
+                    console.log(obj)
+                    $("#titleKg").html(obj['barang_nama']);
+                    $("#idkg").val(obj['barang_id']);
+                    $("#title_modal").html("Masukan Qty Dalam " + obj['barang_satuan']);
+                    $("#showBRGKg").modal("show");
+                    $('#showBRGKg').on('shown.bs.modal', function() {
+                        $('#kgqty').focus();
+                        $("#kgqty").val("");
+                    });
                 }
             });
         });
 
     });
 
+
+    function addKeranjangkilo() {
+        if (event.key === 'Enter') {
+            $.ajax({
+                url: '<?= base_url('penjualan/add_to_cart_kilo'); ?>',
+                type: "POST",
+                data: {
+                    idkg: $("#idkg").val(),
+                    kgqty: $("#kgqty").val(),
+                },
+                success: (a) => {
+                    $('#detail_cart').load("<?= site_url('penjualan/read'); ?>");
+                    resultHasil();
+                    $("#showBRGKg").modal("hide");
+                },
+                error: (a) => {
+                    console.log('e' + a);
+                },
+            });
+        }
+    }
+
+    function ambilbarang(kodebar) {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('penjualan/ambil_barang'); ?>",
+            data: kodebar,
+            success: function(msg) {
+                // console.log(msg);
+                $('#detail_barang').html(msg);
+                addTochart();
+                $("#kode_brg")[0].focus();
+            }
+        });
+    }
 
     $(document).ready(function() {
         // Edit item cart
@@ -397,7 +467,8 @@
 
         });
     });
-    
+
+    //buat nampilin satuan kilo
 </script>
 
 </body>
