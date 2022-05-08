@@ -14,6 +14,7 @@ let url,
       { data: "jual_kembalian" },
       { data: "petugas" },
       { data: "note" },
+      { data: "sts" },
       { data: "action" },
     ],
   });
@@ -25,7 +26,24 @@ function detail(a) {
   $("#LAPmodalDetail").modal("show");
   $("#detailBarang").load(LAPdetailurl + a);
 }
-
+function lunas(a) {
+  console.log(a);
+  $.ajax({
+    url: TRGeditUrl,
+    type: "post",
+    dataType: "json",
+    data: {
+      jlStatus: a,
+    },
+    success: (a) => {
+      console.log(a);
+      lapgrosir.ajax.reload();
+    },
+    error: (a) => {
+      console.log(a);
+    },
+  });
+}
 lapgrosir.on("order.dt search.dt", () => {
   lapgrosir
     .column(0, { search: "applied", order: "applied" })

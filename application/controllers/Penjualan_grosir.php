@@ -131,6 +131,13 @@ class Penjualan_grosir extends CI_Controller
 		if ($this->session->userdata('akses') == '1' || $this->session->userdata('akses') == '2') {
 			$total = $this->input->post('total');
 			$pesan = $this->input->post('message');
+			$stsBayar = $this->input->post('setTotal');
+
+			if (empty($stsBayar)) {
+				$stsBayar = '0';
+			} else {
+				$stsBayar = '1';
+			}
 
 			if (!empty($this->input->post('pelanggan')) || $this->input->post('pelanggan') != "" || $this->input->post('pelanggan') != null) {
 				$this->db->where('kode', $this->input->post('pelanggan'));
@@ -149,7 +156,7 @@ class Penjualan_grosir extends CI_Controller
 				} else {
 					$nofak = $this->m_penjualan->get_nofak();
 					$this->session->set_userdata('nofak', $nofak);
-					$order_proses = $this->m_penjualan->simpan_penjualan_grosir($nofak, $total, $jml_uang, $kembalian, $pelanggan, $pesan);
+					$order_proses = $this->m_penjualan->simpan_penjualan_grosir($nofak, $total, $jml_uang, $kembalian, $pelanggan, $pesan, $stsBayar);
 					if ($order_proses) {
 						$this->cart->destroy();
 

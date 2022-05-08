@@ -14,16 +14,49 @@ let url,
       { data: "jual_kembalian" },
       { data: "petugas" },
       { data: "note" },
+      { data: "sts" },
       { data: "action" },
     ],
+    columnDefs: [
+      {
+        targets: [0],
+        render: function (data, type, row) {
+          if (row.index > 2) {
+            return "<div style='background-color:red'>" + data + "<div>";
+          }
+          return data;
+        },
+      },
+    ],
   });
+
 function reloadTable() {
   lapEceran.ajax.reload();
 }
 
 function detail(a) {
+  console.log(a);
   $("#LAPmodalDetail").modal("show");
   $("#detailBarang").load(LAPdetailurl + a);
+}
+
+function lunas(a) {
+  console.log(a);
+  $.ajax({
+    url: TRGeditUrl,
+    type: "post",
+    dataType: "json",
+    data: {
+      jlStatus: a,
+    },
+    success: (a) => {
+      console.log(a);
+      lapEceran.ajax.reload();
+    },
+    error: (a) => {
+      console.log(a);
+    },
+  });
 }
 
 lapEceran.on("order.dt search.dt", () => {

@@ -27,6 +27,7 @@
                                 <th>Jumlah Kembalian</th>
                                 <th>Petugas</th>
                                 <th>Pesan</th>
+                                <th>Bayar</th>
                                 <th>Detail</th>
                             </tr>
                         </thead>
@@ -100,6 +101,7 @@
 <script>
     var LAPreadUrl = '<?php echo base_url('laporan/readlapgrosir') ?>';
     var LAPdetailurl = '<?php echo base_url('laporan/readdetail/') ?>';
+    var TRGeditUrl = '<?php echo base_url('laporan/updatehutang') ?>';
 </script>
 <script src="<?php echo base_url('assets/js/lapGrosir.js') ?>"></script>
 <script type="text/javascript">

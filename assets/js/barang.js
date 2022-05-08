@@ -34,6 +34,7 @@ function addData() {
       $(".modal").modal("hide"),
         Swal.fire("Sukses", "Sukses Menambahkan Barang", "success"),
         reloadTable();
+        $('#BRformadd')[0].reset(); 
     },
     error: (a) => {
       console.log(a);

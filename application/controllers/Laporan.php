@@ -135,16 +135,18 @@ class Laporan extends CI_Controller
         $iterasi = 1;
         if ($this->m_laporan->readEceran()->num_rows() > 0) {
             foreach ($this->m_laporan->readEceran()->result() as $lapEcer) {
+                $idTran = (string)$lapEcer->jual_nofak;
                 $data[] = array(
                     'no' => $iterasi++,
-                    'jual_nofak' => $lapEcer->jual_nofak,
+                    'jual_nofak' => $idTran,
                     'jual_tanggal' => $lapEcer->jual_tanggal,
                     'jual_total' => $lapEcer->jual_total,
                     'jual_jml_uang' => $lapEcer->jual_jml_uang,
                     'jual_kembalian' => $lapEcer->jual_kembalian,
                     'petugas' => $this->getPetugas($lapEcer->jual_user_id),
                     'note' => $lapEcer->jual_deskripsi,
-                    'action' => '<button class="btn btn-sm btn-warning" onclick="detail(' . $lapEcer->jual_nofak . ')"><i class="fas fa-edit"></i></button>'
+                    'sts' => $lapEcer->jual_status === '1' ? "<h6 class='alert alert-danger'>Hutang</h6>" : "<h6 class='alert alert-success'>Lunas</h6>",
+                    'action' => '<button class="btn btn-sm btn-warning" onclick="detail(\'' . $lapEcer->jual_nofak . '\')"><i class="fas fa-edit"></i></button> &nbsp; <button class="btn btn-sm btn-primary" onclick="lunas(\'' . $lapEcer->jual_nofak . '\')"><i class="fas fa-check"></i></button>',
                 );
             }
         } else {
@@ -171,7 +173,8 @@ class Laporan extends CI_Controller
                     'jual_kembalian' => $lapEcer->jual_kembalian,
                     'petugas' => $this->getPetugas($lapEcer->jual_user_id),
                     'note' => $lapEcer->jual_deskripsi,
-                    'action' => '<button class="btn btn-sm btn-warning" onclick="detail(' . $lapEcer->jual_nofak . ')"><i class="fas fa-edit"></i></button>'
+                    'sts' => $lapEcer->jual_status === '1' ? "<h6 class='alert alert-danger'>Hutang</h6>" : "<h6 class='alert alert-success'>Lunas</h6>",
+                    'action' => '<button class="btn btn-sm btn-warning" onclick="detail(\'' . $lapEcer->jual_nofak . '\')"><i class="fas fa-edit"></i></button> &nbsp; <button class="btn btn-sm btn-primary" onclick="lunas(\'' . $lapEcer->jual_nofak . '\')"><i class="fas fa-check"></i></button>',
                 );
             }
         } else {
@@ -201,6 +204,20 @@ class Laporan extends CI_Controller
             $i++;
         }
         echo $output;
+    }
+
+    public function updateHutang()
+    {
+        $id = $this->input->post('jlStatus');
+
+        $data = array(
+            'jual_status' => '0',
+        );
+
+        $this->db->where('jual_nofak', $id);
+        if ($this->db->update('tbl_jual', $data)) {
+            echo json_encode("Sukses");
+        }
     }
 
     private function getPetugas($id)
