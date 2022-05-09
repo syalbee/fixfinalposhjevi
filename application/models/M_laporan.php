@@ -67,15 +67,35 @@ class M_laporan extends CI_Model
         return $hsl;
     }
 
+    // //=========Laporan Laba rugi============
+    // public function get_lap_laba_rugi($bulan)
+    // {
+    //     $hsl = $this->db->query("SELECT DATE_FORMAT(jual_tanggal,'%d %M %Y %H:%i:%s') as jual_tanggal,d_jual_barang_nama,d_jual_barang_satuan,d_jual_barang_harpok,d_jual_barang_harjul,(d_jual_barang_harjul-d_jual_barang_harpok) AS keunt,d_jual_qty,d_jual_diskon,((d_jual_barang_harjul-d_jual_barang_harpok)*d_jual_qty)-(d_jual_qty*d_jual_diskon) AS untung_bersih FROM tbl_jual JOIN tbl_detail_jual ON jual_nofak=d_jual_nofak WHERE DATE_FORMAT(jual_tanggal,'%M %Y')='$bulan'");
+    //     return $hsl;
+    // }
+    // public function get_total_lap_laba_rugi($bulan)
+    // {
+    //     $hsl = $this->db->query("SELECT DATE_FORMAT(jual_tanggal,'%M %Y') AS bulan,d_jual_barang_nama,d_jual_barang_satuan,d_jual_barang_harpok,d_jual_barang_harjul,(d_jual_barang_harjul-d_jual_barang_harpok) AS keunt,d_jual_qty,d_jual_diskon, SUM(((d_jual_barang_harjul-d_jual_barang_harpok)*d_jual_qty)-(d_jual_qty*d_jual_diskon)) AS total FROM tbl_jual JOIN tbl_detail_jual ON jual_nofak=d_jual_nofak WHERE DATE_FORMAT(jual_tanggal,'%M %Y')='$bulan'");
+    //     return $hsl;
+    // }
+
     //=========Laporan Laba rugi============
     public function get_lap_laba_rugi($bulan)
     {
-        $hsl = $this->db->query("SELECT DATE_FORMAT(jual_tanggal,'%d %M %Y %H:%i:%s') as jual_tanggal,d_jual_barang_nama,d_jual_barang_satuan,d_jual_barang_harpok,d_jual_barang_harjul,(d_jual_barang_harjul-d_jual_barang_harpok) AS keunt,d_jual_qty,d_jual_diskon,((d_jual_barang_harjul-d_jual_barang_harpok)*d_jual_qty)-(d_jual_qty*d_jual_diskon) AS untung_bersih FROM tbl_jual JOIN tbl_detail_jual ON jual_nofak=d_jual_nofak WHERE DATE_FORMAT(jual_tanggal,'%M %Y')='$bulan'");
+        $hsl = $this->db->query("SELECT DATE_FORMAT(jual_tanggal,'%M %Y') AS bulan, barang_min_stok, jual_keterangan, 
+        DATE_FORMAT(jual_tanggal,'%d %M %Y %H:%i:%s') AS jual_tanggal,
+        d_jual_barang_nama,d_jual_barang_satuan,d_jual_barang_harpok,d_jual_barang_harjul,d_jual_qty,d_jual_diskon
+        FROM tbl_jual JOIN tbl_detail_jual ON jual_nofak=d_jual_nofak JOIN tbl_barang ON tbl_barang.`barang_id` = tbl_detail_jual.d_jual_barang_id 
+        WHERE DATE_FORMAT(jual_tanggal,'%M %Y') ='$bulan'");
         return $hsl;
     }
     public function get_total_lap_laba_rugi($bulan)
     {
-        $hsl = $this->db->query("SELECT DATE_FORMAT(jual_tanggal,'%M %Y') AS bulan,d_jual_barang_nama,d_jual_barang_satuan,d_jual_barang_harpok,d_jual_barang_harjul,(d_jual_barang_harjul-d_jual_barang_harpok) AS keunt,d_jual_qty,d_jual_diskon, SUM(((d_jual_barang_harjul-d_jual_barang_harpok)*d_jual_qty)-(d_jual_qty*d_jual_diskon)) AS total FROM tbl_jual JOIN tbl_detail_jual ON jual_nofak=d_jual_nofak WHERE DATE_FORMAT(jual_tanggal,'%M %Y')='$bulan'");
+        $hsl = $this->db->query("SELECT DATE_FORMAT(jual_tanggal,'%M %Y') AS bulan, barang_min_stok, jual_keterangan, 
+        DATE_FORMAT(jual_tanggal,'%d %M %Y %H:%i:%s') AS jual_tanggal,
+        d_jual_barang_nama,d_jual_barang_satuan,d_jual_barang_harpok,d_jual_barang_harjul,d_jual_qty,d_jual_diskon
+        FROM tbl_jual JOIN tbl_detail_jual ON jual_nofak=d_jual_nofak JOIN tbl_barang ON tbl_barang.`barang_id` = tbl_detail_jual.d_jual_barang_id 
+        WHERE DATE_FORMAT(jual_tanggal,'%M %Y') ='$bulan'");
         return $hsl;
     }
 
@@ -99,6 +119,6 @@ class M_laporan extends CI_Model
     public function readDetail($nofak)
     {
         $this->db->where('d_jual_nofak', $nofak);
-		return $this->db->get('tbl_detail_jual');
+        return $this->db->get('tbl_detail_jual');
     }
 }

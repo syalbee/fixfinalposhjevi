@@ -10,6 +10,7 @@ class Laporan extends CI_Controller
             $url = base_url();
             redirect($url);
         };
+        
         $this->load->model('m_kategori');
         $this->load->model('m_barang');
         $this->load->model('m_suplier');

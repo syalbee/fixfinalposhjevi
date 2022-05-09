@@ -17,7 +17,6 @@
                     </center><br />
                 </td>
             </tr>
-
         </table>
 
         <table border="0" align="center" style="width:900px;border:none;">
@@ -38,6 +37,7 @@
                     <th>Tanggal</th>
                     <th>Nama Barang</th>
                     <th>Satuan</th>
+                    <th>Jenis</th>
                     <th>Harga Pokok</th>
                     <th>Harga Jual</th>
                     <th>Keuntungan Per Unit</th>
@@ -52,22 +52,30 @@
                 $sum = 0;
                 foreach ($data->result_array() as $i) {
                     $no++;
+                    $minStok = $i['barang_min_stok'];
+                    $ket =  $i['jual_keterangan'];
                     $tgl = $i['jual_tanggal'];
                     $nabar = $i['d_jual_barang_nama'];
                     $satuan = $i['d_jual_barang_satuan'];
                     $harpok = $i['d_jual_barang_harpok'];
                     $harjul = $i['d_jual_barang_harjul'];
-                    $untung_perunit = $i['keunt'];
                     $qty = $i['d_jual_qty'];
                     $diskon = $i['d_jual_diskon'];
-                    $untung_bersih = $i['untung_bersih'];
-                    $sum +=  $i['untung_bersih'];
+                    if($ket === 'grosir'){
+                        $untung_perunit = $harjul - $harpok;
+                        $untung_bersih = (($harjul - $harpok)* $qty) - ( $qty*$diskon );
+                    } else {
+                        $untung_perunit = ($harjul * $minStok) - $harpok;
+                        $untung_bersih = ((($harjul * $minStok) - $harpok)* $qty) - ( $qty*$diskon ) +0;
+                    }
+                    $sum +=  $untung_bersih ;
                 ?>
                     <tr>
                         <td style="text-align:center;"><?php echo $no; ?></td>
                         <td style="text-align:center;"><?php echo $tgl; ?></td>
                         <td style="text-align:left;"><?php echo $nabar; ?></td>
                         <td style="text-align:left;"><?php echo $satuan; ?></td>
+                        <td style="text-align:left;"><?php echo $ket; ?></td>
                         <td style="text-align:right;"><?php echo 'Rp ' . number_format($harpok); ?></td>
                         <td style="text-align:right;"><?php echo 'Rp ' . number_format($harjul); ?></td>
                         <td style="text-align:right;"><?php echo 'Rp ' . number_format($untung_perunit); ?></td>
@@ -81,7 +89,7 @@
 
                 <tr>
                     <td colspan="9" style="text-align:center;"><b>Total Keuntungan</b></td>
-                    <td style="text-align:right;"><b><?php echo 'Rp ' . number_format($b['total']); ?></b></td>
+                    <td style="text-align:right;"><b><?php echo 'Rp ' . number_format($sum); ?></b></td>
                 </tr>
             </tfoot>
         </table>

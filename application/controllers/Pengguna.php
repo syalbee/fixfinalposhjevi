@@ -40,8 +40,8 @@ class Pengguna extends CI_Controller
                         'no' => $iterasi++,
                         'nama' => $pengguna->user_nama,
                         'username' => $pengguna->user_username,
-                        'level' => $pengguna->user_level,
-                        'status' => $pengguna->user_status,
+                        'level' => $pengguna->user_level  == '1' ? 'Admin' : 'Kasir',
+                        'status' => $pengguna->user_status  == '1' ? 'Aktif' : 'Tidak KAtif',
                         'action' => '<button class="btn btn-sm btn-warning" onclick="edit(' . $pengguna->user_id . ')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-danger" onclick="remove(' . $pengguna->user_id . ')"><i class="fas fa-trash"></i></button>'
                     );
                 }
