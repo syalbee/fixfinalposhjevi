@@ -27,7 +27,8 @@
                                 <!-- <th>Kode Barang</th> -->
                                 <th>Nama Barang</th>
                                 <th>Satuan</th>
-                                <th>Harga Pokok</th>
+                                <th>Hrg Pk Grosir</th>
+                                <th>Hrg Pk Eceran</th>
                                 <th>Harga (Eceran)</th>
                                 <th>Harga (Grosir)</th>
                                 <th>Stok Utama</th>
@@ -98,8 +99,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Harga Pokok Untuk Satuan Utama</label>
-                        <input name="harpok" class="harpok form-control" type="text" placeholder="Harga Pokok" required>
+                        <label>Harga Pokok Untuk Grosir</label>
+                        <input name="harpok" class="harpok form-control" type="text" placeholder="Harga Pokok Grosir" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Harga Pokok Untuk Eceran</label>
+                        <input name="harpokeceran" class="harpokeceran form-control" type="text" placeholder="Harga Pokok Eceran" required>
                     </div>
 
                     <div class="form-group">
@@ -211,8 +217,13 @@
                     </div> -->
                     
                     <div class="form-group">
-                        <label>Harga Pokok Untuk Satuan Utama</label>
-                        <input name="harpok" class="harpok form-control" type="text" placeholder="Harga Pokok" required>
+                        <label>Harga Pokok Grosir</label>
+                        <input name="harpok" class="harpok form-control" type="text" placeholder="Harga Pokok Grosir" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Harga Pokok Eceran</label>
+                        <input name="harpok_eceran" class="harpok form-control" type="text" placeholder="Harga Pokok Eceran" required>
                     </div>
 
                     <div class="form-group">

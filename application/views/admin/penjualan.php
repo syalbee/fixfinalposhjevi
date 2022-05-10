@@ -347,6 +347,7 @@
 
     function addKeranjangkilo() {
         if (event.key === 'Enter') {
+            console.log("Kerangjang kilo");
             $.ajax({
                 url: '<?= base_url('penjualan/add_to_cart_kilo'); ?>',
                 type: "POST",

@@ -11,6 +11,7 @@ let url,
       { data: "barang_nama" },
       { data: "satuan_nama" },
       { data: "barang_harpok" },
+      { data: "barang_harpok_eceran" },
       { data: "barang_harjul" },
       { data: "barang_harjul_grosir" },
       { data: "barang_stok" },
@@ -20,6 +21,7 @@ let url,
       { data: "action" },
     ],
   });
+  
 function reloadTable() {
   barang.ajax.reload();
 }
@@ -83,6 +85,7 @@ function editData() {
 }
 
 function edit(a) {
+
   $.ajax({
     url: BRGget_barangUrl,
     type: "post",
@@ -94,6 +97,7 @@ function edit(a) {
         // $('[name="barcode"]').val(a.barcode),
         $('[name="nabar"]').val(a.barang_nama),
         $('[name="harpok"]').val(a.barang_harpok),
+        $('[name="harpok_eceran"]').val(a.barang_harpok_eceran),
         $('[name="harjul_grosir"]').val(a.barang_harjul_grosir),
         $('[name="harjul"]').val(a.barang_harjul),
         $('[name="min_stok"]').val(a.barang_min_stok),

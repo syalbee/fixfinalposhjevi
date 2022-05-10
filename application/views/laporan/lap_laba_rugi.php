@@ -61,14 +61,11 @@
                     $harjul = $i['d_jual_barang_harjul'];
                     $qty = $i['d_jual_qty'];
                     $diskon = $i['d_jual_diskon'];
-                    if($ket === 'grosir'){
-                        $untung_perunit = $harjul - $harpok;
-                        $untung_bersih = (($harjul - $harpok)* $qty) - ( $qty*$diskon );
-                    } else {
-                        $untung_perunit = ($harjul * $minStok) - $harpok;
-                        $untung_bersih = ((($harjul * $minStok) - $harpok)* $qty) - ( $qty*$diskon ) +0;
-                    }
-                    $sum +=  $untung_bersih ;
+
+                    $untung_perunit = $harjul - $harpok;
+                    $untung_bersih = (($harjul - $harpok)* $qty) - ( $qty*$diskon );
+
+                    $sum +=  $untung_bersih;
                 ?>
                     <tr>
                         <td style="text-align:center;"><?php echo $no; ?></td>
@@ -84,15 +81,17 @@
                         <td style="text-align:right;"><?php echo 'Rp ' . number_format($untung_bersih); ?></td>
                     </tr>
                 <?php } ?>
+
             </tbody>
             <tfoot>
 
                 <tr>
                     <td colspan="9" style="text-align:center;"><b>Total Keuntungan</b></td>
-                    <td style="text-align:right;"><b><?php echo 'Rp ' . number_format($sum); ?></b></td>
+                    <td colspan="2" style="text-align:right;"><b><?php echo 'Rp ' . number_format($sum); ?></b></td>
                 </tr>
             </tfoot>
         </table>
+
         <table align="center" style="width:800px; border:none;margin-top:5px;margin-bottom:20px;">
             <tr>
                 <td></td>

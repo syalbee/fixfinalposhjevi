@@ -48,6 +48,7 @@ class Barang extends CI_Controller
                     'barang_nama' => $barang->barang_nama,
                     'satuan_nama' => $barang->satuan_nama . " & " . $barang->satuan_turunan,
                     'barang_harpok' => $barang->barang_harpok,
+                    'barang_harpok_eceran' => $barang->barang_harpok_eceran,
                     'barang_harjul' => $barang->barang_harjul,
                     'barang_harjul_grosir' => $barang->barang_harjul_grosir,
                     'barang_stok' => round($barang->barang_stok) . " " . $barang->satuan_nama,
@@ -74,6 +75,7 @@ class Barang extends CI_Controller
             'barcode' => $kodebarang,
             'barang_nama' => $this->input->post('nabar'),
             'barang_harpok' => $this->input->post('harpok'),
+            'barang_harpok_eceran' => $this->input->post('harpokeceran'),
             'barang_harjul' => $this->input->post('harjul'),
             'barang_harjul_grosir' => $this->input->post('harjul_grosir'),
             'barang_stok' => $this->input->post('stok'),
@@ -119,6 +121,7 @@ class Barang extends CI_Controller
         $data = array(
             'barang_nama' => $this->input->post('nabar'),
             'barang_harpok' => $this->input->post('harpok'),
+            'barang_harpok_eceran' => $this->input->post('harpok_eceran'),
             'barang_harjul' => $this->input->post('harjul'),
             'barang_harjul_grosir' => $this->input->post('harjul_grosir'),
             'barang_tgl_last_update' => date('Y-m-d H:i:s'),

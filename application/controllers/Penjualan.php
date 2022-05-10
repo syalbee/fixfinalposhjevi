@@ -77,6 +77,7 @@ class Penjualan extends CI_Controller
 			$produk = $this->m_barang->get_beli($kobar);
 
 			$i = $produk->row_array();
+
 			$data = array(
 				'id'       => $i['barang_id'],
 				'name'     => $i['barang_nama'],
@@ -100,15 +101,17 @@ class Penjualan extends CI_Controller
 	{
 
 		if ($this->session->userdata('akses') == '1' || $this->session->userdata('akses') == '2') {
+			
 			$kobar = $this->input->post('idkg');
 			$produk = $this->m_barang->get_beli($kobar);
 
 			$i = $produk->row_array();
+
 			$data = array(
 				'id'       => $i['barang_id'],
 				'name'     => $i['barang_nama'],
 				'satuan'   => $i['satuan_turunan'],
-				'harpok'   => $i['barang_harpok'],
+				'harpok'   => $i['barang_harpok_eceran'],
 				'price'    => intval($i['barang_harjul']),
 				'disc'     => 0,
 				'qty'      => $this->input->post('kgqty'),
@@ -260,13 +263,14 @@ class Penjualan extends CI_Controller
 
 	public function coba()
 	{
-		// $this->cart->destroy();
+		$this->cart->destroy();
 		// // foreach ($this->cart->contents() as $items) {
 		// // 	echo $items['name'] . "<br>";
 		// // 	echo $items['qty'] . "<br>";
 
 		// // 	echo $items['rowid'] . "<br>";
 		// // }
+
 		// $kobar = "BR000011";
 		// $x['brg'] = $this->m_barang->get_beli($kobar);
 		// $Kgid = $this->db->query('SELECT satuan_id FROM tbl_satuan WHERE satuan_nama ="Kg"')->result_array()[0]['satuan_id'];
@@ -280,11 +284,12 @@ class Penjualan extends CI_Controller
 		// $this->db->where('id', '12');
 		// $data = $this->db->get('tbl_member');
 		// echo json_encode($data->row());
-		$id = "BR000003";
-		$qty = 3;
-		$this->db->where('barang_id', $id);
-		$qtyBarang = $this->db->get('tbl_barang')->result_array()[0]['barang_min_stok'];
 
-		echo $qty / $qtyBarang;
+		// $id = "BR000003";
+		// $qty = 3;
+		// $this->db->where('barang_id', $id);
+		// $qtyBarang = $this->db->get('tbl_barang')->result_array()[0]['barang_min_stok'];
+
+		// echo $qty / $qtyBarang;
 	}
 }

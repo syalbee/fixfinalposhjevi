@@ -27,6 +27,7 @@ function addData() {
       $(".modal").modal("hide"),
         Swal.fire("Sukses", "Sukses Menambahkan Suplier", "success"),
         reloadTable();
+        $('#SPformadd')[0].reset(); 
     },
     error: (a) => {
       console.log(a);
